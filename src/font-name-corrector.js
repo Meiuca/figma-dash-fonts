@@ -1,17 +1,24 @@
 const { readdirSync, renameSync } = require("fs");
 const opentype = require("opentype.js");
 const exceptionHandler = require("figma-dash-core/exception-handler");
+const path = require("path");
+const config = require("figma-dash-core/config-handler").handle();
 
 module.exports = () => {
   try {
-    readdirSync("./assets/fonts").forEach((file) => {
+    readdirSync(config.fonts.output).forEach((file) => {
+      let resolvedOutPath = path.resolve(config.fonts.output, file);
+
       if (file.includes("ttf") || file.includes("otf")) {
-        postScriptName = opentype.loadSync("./assets/fonts/" + file).tables.name
+        postScriptName = opentype.loadSync(resolvedOutPath).tables.name
           .postScriptName.en;
 
         renameSync(
-          "./assets/fonts/" + file,
-          `./assets/fonts/${postScriptName}.${/[^.]+$/.exec(file)[0]}`
+          resolvedOutPath,
+          path.resolve(
+            config.fonts.output,
+            `./${postScriptName}.${/[^.]+$/.exec(file)[0]}`
+          )
         );
       }
     });
