@@ -38,12 +38,12 @@ function link() {
   );
 }
 
-module.exports = (fonts) => {
+module.exports = async (fonts) => {
   let outPath = path.resolve(process.cwd(), config.fonts.output);
 
   if (!existsSync(outPath)) mkdirSync(outPath, { recursive: true });
 
-  fonts.forEach(async (font, index, fontArray) => {
+  let fontDownloadPromises = fonts.map(async (font) => {
     let out = path.resolve(outPath, `./${font.local}`);
 
     console.log(
@@ -61,7 +61,9 @@ module.exports = (fonts) => {
     } catch (err) {
       exceptionHandler(err, `error thrown when fetching ${font.src}`);
     }
-
-    if (index + 1 == fontArray.length) link();
   });
+
+  await Promise.all(fontDownloadPromises);
+
+  link();
 };
