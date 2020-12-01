@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const path = require("path");
-const { existsSync, mkdirSync, createWriteStream } = require("fs");
+const { existsSync, mkdirSync, writeFileSync } = require("fs");
 const exceptionHandler = require("figma-dash-core/exception-handler");
 const axios = require("axios").default;
 const { spawn } = require("child_process");
@@ -54,10 +54,10 @@ module.exports = (fonts) => {
 
     try {
       let { data } = await axios.get(font.src, {
-        responseType: "stream",
+        responseType: "arraybuffer",
       });
 
-      data.pipe(createWriteStream(out));
+      writeFileSync(out, data);
     } catch (err) {
       exceptionHandler(err, `error thrown when fetching ${font.src}`);
     }
