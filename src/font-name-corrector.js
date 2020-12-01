@@ -6,11 +6,11 @@ const config = require("figma-dash-core/config-handler").handle();
 
 module.exports = () => {
   try {
-    readdirSync(config.fonts.output).forEach((file) => {
+    readdirSync(config.fonts.output).forEach(async (file) => {
       let resolvedOutPath = path.resolve(config.fonts.output, file);
 
       if (file.includes("ttf") || file.includes("otf")) {
-        postScriptName = opentype.loadSync(resolvedOutPath).tables.name
+        postScriptName = opentype.load(resolvedOutPath).tables.name
           .postScriptName.en;
 
         renameSync(
