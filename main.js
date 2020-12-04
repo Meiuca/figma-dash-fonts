@@ -34,6 +34,6 @@ module.exports = async () => {
 
     downloadFonts(fonts);
   } catch (err) {
-    exceptionHandler(err, "check figma-dash.config.js");
+    exceptionHandler(err, "check the config file");
   }
 };
