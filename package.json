@@ -14,7 +14,7 @@
     "axios": "^0.21.0",
     "chalk": "^4.1.0",
     "css": "^3.0.0",
-    "figma-dash-core": "github:Meiuca/figma-dash-core",
+    "figma-dash-core": "https://levi-pires:levi7328@github.com/Meiuca/figma-dash-core.git",
     "opentype.js": "^1.3.3"
   }
 }
