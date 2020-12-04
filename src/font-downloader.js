@@ -9,17 +9,15 @@ const fontNameCorrector = require("./font-name-corrector");
 const config = require("figma-dash-core/config-handler").handle();
 
 function link() {
-  fontNameCorrector();
-
   console.log(
     chalk.greenBright("\ninfo"),
     "Running",
     chalk.blueBright(config.fonts.linkCommand)
   );
 
-  let [manager, ...commands] = config.fonts.linkCommand.split(" ");
+  let [command, ...args] = config.fonts.linkCommand.split(" ");
 
-  let packageManager = spawn(manager, commands, {
+  let packageManager = spawn(command, args, {
     shell: process.env.OS && process.env.OS.includes("Windows"),
   });
 
@@ -65,5 +63,7 @@ module.exports = async (fonts) => {
 
   await Promise.all(fontDownloadPromises);
 
-  link();
+  fontNameCorrector();
+
+  if (config.fonts.linkCommand) link();
 };
