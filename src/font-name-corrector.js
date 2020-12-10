@@ -10,8 +10,9 @@ module.exports = () => {
       let resolvedOutPath = path.resolve(config.fonts.output, file);
 
       if (file.includes("ttf") || file.includes("otf")) {
-        let postScriptName = opentype.loadSync(resolvedOutPath).tables.name
-          .postScriptName.en;
+        let postScriptName = Object.values(
+          opentype.loadSync(resolvedOutPath).tables.name.postScriptName
+        )[0];
 
         renameSync(
           resolvedOutPath,

@@ -13,7 +13,9 @@ module.exports = async () => {
     let fonts = [];
 
     if (config.fonts.files) {
-      let parsedFonts = parseFonts(config.fonts.files);
+      let parsedFonts = parseFonts(
+        path.resolve(config.figma.output, "./tokens.json")
+      );
 
       let convertedLinks = await Promise.all(convertLink(parsedFonts));
 

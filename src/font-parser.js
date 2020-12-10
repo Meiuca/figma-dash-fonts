@@ -3,34 +3,32 @@ const exceptionHandler = require("figma-dash-core/exception-handler");
 const { parseDeepObj } = require("figma-dash-core/functions");
 const config = require("figma-dash-core/config-handler").handle();
 
-module.exports = (srcArray) => {
+module.exports = (src) => {
   try {
-    return srcArray
-      .map((src) => {
-        let fonts = parseDeepObj(require(path.resolve(src)));
+    let fonts = parseDeepObj(require(src));
 
-        let _return = {
-          family: [],
-          weight: [],
-        };
+    let _return = {
+      family: [],
+      weight: [],
+    };
 
-        fonts.forEach((item) => {
-          if (/^[A-Z][A-Za-z]+/.test(item)) {
-            _return.family.push(item.replace(/\s/g, "+"));
-          }
+    fonts.forEach((item) => {
+      if (/^[A-Z][A-Za-z]+/.test(item)) {
+        _return.family.push(item.replace(/\s/g, "+"));
+      }
 
-          if (/^[0-9]{3}$/.test(item)) {
-            _return.weight.push(item);
-          }
-        });
+      if (/^[0-9]{3}$/.test(item)) {
+        _return.weight.push(item);
+      }
+    });
 
-        return _return.family.map((fItem) => {
-          return _return.weight.map((wItem) =>
-            config.fonts.provider
-              .replace(/\{f\}/g, fItem)
-              .replace(/\{w\}/g, wItem)
-          );
-        });
+    return _return.family
+      .map((fItem) => {
+        return _return.weight.map((wItem) =>
+          config.fonts.provider
+            .replace(/\{f\}/g, fItem)
+            .replace(/\{w\}/g, wItem)
+        );
       })
       .flat(2);
   } catch (err) {

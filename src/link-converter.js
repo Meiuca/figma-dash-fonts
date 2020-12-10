@@ -28,11 +28,11 @@ function cssMapper(rule) {
         (item) => item.property == "font-weight"
       )[0].value;
 
-      let italic = rule.declarations.filter(
+      let fontStyle = rule.declarations.filter(
         (item) => item.property == "font-style"
       )[0].value;
 
-      font.push(fontFamilyWithoutQuote + fontWeight + italic);
+      font.push(fontFamilyWithoutQuote + fontWeight + fontStyle);
     });
 
   return {
