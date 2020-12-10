@@ -1,4 +1,3 @@
-const path = require("path");
 const exceptionHandler = require("figma-dash-core/exception-handler");
 const { parseDeepObj } = require("figma-dash-core/functions");
 const config = require("figma-dash-core/config-handler").handle();

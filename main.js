@@ -5,6 +5,7 @@ const { validateFonts } = require("figma-dash-core/validations");
 const downloadFonts = require("./src/font-downloader");
 const convertLink = require("./src/link-converter");
 const parseFonts = require("./src/font-parser");
+const path = require("path");
 
 module.exports = async () => {
   try {
