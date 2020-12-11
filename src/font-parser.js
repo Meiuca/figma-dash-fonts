@@ -6,24 +6,24 @@ module.exports = (src) => {
   try {
     let fonts = parseDeepObj(require(src));
 
-    let _return = {
+    let to_ret = {
       family: [],
       weight: [],
     };
 
     fonts.forEach((item) => {
-      if (/^[A-Z][A-Za-z]+/.test(item)) {
-        _return.family.push(item.replace(/\s/g, "+"));
+      if (/(^|')[A-Z][A-Za-z]+/.test(item)) {
+        to_ret.family.push(item.replace(/\s/g, "+").replace(/'/g, ""));
       }
 
       if (/^[0-9]{3}$/.test(item)) {
-        _return.weight.push(item);
+        to_ret.weight.push(item);
       }
     });
 
-    return _return.family
+    return to_ret.family
       .map((fItem) => {
-        return _return.weight.map((wItem) =>
+        return to_ret.weight.map((wItem) =>
           config.fonts.provider
             .replace(/\{f\}/g, fItem)
             .replace(/\{w\}/g, wItem)
