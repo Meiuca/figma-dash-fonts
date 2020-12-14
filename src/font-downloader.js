@@ -3,41 +3,9 @@ const path = require("path");
 const { existsSync, mkdirSync, writeFileSync } = require("fs");
 const exceptionHandler = require("figma-dash-core/exception-handler");
 const axios = require("axios").default;
-const { spawn } = require("child_process");
-const { tab } = require("figma-dash-core/functions");
 const fontNameCorrector = require("./font-name-corrector");
+const link = require("./linker");
 const config = require("figma-dash-core/config-handler").handle();
-
-function link() {
-  console.log(
-    chalk.greenBright("\ninfo"),
-    "Running",
-    chalk.blueBright(config.fonts.linkCommand)
-  );
-
-  let [command, ...args] = config.fonts.linkCommand.split(" ");
-
-  return new Promise((resolve) => {
-    let packageManager = spawn(command, args, {
-      shell: process.env.OS && process.env.OS.includes("Windows"),
-    });
-
-    packageManager.stdout.on("data", (chunk) => {
-      console.log(tab(1), chunk.toString("utf-8").replace("\n", ""));
-    });
-
-    packageManager.stderr.on("data", (chunk) =>
-      exceptionHandler(new Error(chunk.toString("utf-8")))
-    );
-
-    packageManager.on("error", exceptionHandler);
-
-    packageManager.on("close", (code) => {
-      console.log("\nYarn executed with exit code " + code);
-      resolve(code);
-    });
-  });
-}
 
 module.exports = async (fonts) => {
   let outPath = path.resolve(process.cwd(), config.fonts.output);
@@ -68,5 +36,11 @@ module.exports = async (fonts) => {
 
   fontNameCorrector();
 
-  if (config.fonts.linkCommand) await link();
+  if (config.fonts.linkCommand) {
+    try {
+      await link();
+    } catch (err) {
+      exceptionHandler(err);
+    }
+  }
 };
