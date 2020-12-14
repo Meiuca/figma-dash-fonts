@@ -17,23 +17,26 @@ function link() {
 
   let [command, ...args] = config.fonts.linkCommand.split(" ");
 
-  let packageManager = spawn(command, args, {
-    shell: process.env.OS && process.env.OS.includes("Windows"),
+  return new Promise((resolve) => {
+    let packageManager = spawn(command, args, {
+      shell: process.env.OS && process.env.OS.includes("Windows"),
+    });
+
+    packageManager.stdout.on("data", (chunk) => {
+      console.log(tab(1), chunk.toString("utf-8").replace("\n", ""));
+    });
+
+    packageManager.stderr.on("data", (chunk) =>
+      exceptionHandler(new Error(chunk.toString("utf-8")))
+    );
+
+    packageManager.on("error", exceptionHandler);
+
+    packageManager.on("close", (code) => {
+      console.log("\nYarn executed with exit code " + code);
+      resolve(code);
+    });
   });
-
-  packageManager.stdout.on("data", (chunk) => {
-    console.log(tab(1), chunk.toString("utf-8").replace("\n", ""));
-  });
-
-  packageManager.stderr.on("data", (chunk) =>
-    exceptionHandler(new Error(chunk.toString("utf-8")))
-  );
-
-  packageManager.on("error", exceptionHandler);
-
-  packageManager.on("close", (code) =>
-    console.log("\nYarn executed with exit code " + code)
-  );
 }
 
 module.exports = async (fonts) => {
@@ -57,7 +60,7 @@ module.exports = async (fonts) => {
 
       writeFileSync(out, data);
     } catch (err) {
-      exceptionHandler(err, `error thrown when fetching ${font.src}`);
+      exceptionHandler(err, `Error thrown when fetching ${font.src}`);
     }
   });
 
@@ -65,5 +68,5 @@ module.exports = async (fonts) => {
 
   fontNameCorrector();
 
-  if (config.fonts.linkCommand) link();
+  if (config.fonts.linkCommand) await link();
 };

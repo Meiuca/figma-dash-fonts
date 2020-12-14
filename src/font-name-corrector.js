@@ -9,7 +9,7 @@ module.exports = () => {
     readdirSync(config.fonts.output).forEach((file) => {
       let resolvedOutPath = path.resolve(config.fonts.output, file);
 
-      if (file.includes("ttf") || file.includes("otf")) {
+      if (/(o|t)tf/.test(file)) {
         let postScriptName = Object.values(
           opentype.loadSync(resolvedOutPath).tables.name.postScriptName
         )[0];

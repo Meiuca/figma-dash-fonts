@@ -31,6 +31,6 @@ module.exports = (src) => {
       })
       .flat(2);
   } catch (err) {
-    exceptionHandler(err, "try 'init -f' to update the config file");
+    exceptionHandler(err, "try 'init -f' to reset the config file");
   }
 };
