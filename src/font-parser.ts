@@ -1,4 +1,4 @@
-import FigmaDashCore from "figma-dash-core";
+import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
 
 export default function (src: string, core: FigmaDashCore) {
   try {
@@ -29,9 +29,6 @@ export default function (src: string, core: FigmaDashCore) {
       })
       .flat(2);
   } catch (err) {
-    throw new FigmaDashCore.FigmaDashError(
-      err,
-      "try 'init -f' to reset the config file"
-    );
+    throw new FigmaDashError(err, "try 'init -f' to reset the config file");
   }
 }

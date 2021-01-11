@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import path from "path";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
-import FigmaDashCore from "figma-dash-core";
+import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
 import { DirectLink } from "figma-dash-core/dist/config-handler";
 import axios from "axios";
 
@@ -26,10 +26,7 @@ export default async function (fonts: DirectLink[], core: FigmaDashCore) {
 
       writeFileSync(out, data);
     } catch (err) {
-      throw new FigmaDashCore.FigmaDashError(
-        err,
-        `Error thrown when fetching ${font.src}`
-      );
+      throw new FigmaDashError(err, `Error thrown when fetching ${font.src}`);
     }
   });
 

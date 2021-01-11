@@ -1,6 +1,6 @@
 import { readdirSync, renameSync } from "fs";
 import opentype from "opentype.js";
-import FigmaDashCore from "figma-dash-core";
+import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
 import path from "path";
 
 export default function (core: FigmaDashCore) {
@@ -23,6 +23,6 @@ export default function (core: FigmaDashCore) {
       }
     });
   } catch (err) {
-    throw new FigmaDashCore.FigmaDashError(err);
+    throw new FigmaDashError(err);
   }
 }

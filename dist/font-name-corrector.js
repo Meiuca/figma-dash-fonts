@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const opentype_js_1 = __importDefault(require("opentype.js"));
-const figma_dash_core_1 = __importDefault(require("figma-dash-core"));
+const figma_dash_core_1 = require("figma-dash-core");
 const path_1 = __importDefault(require("path"));
 function default_1(core) {
     try {
@@ -18,7 +18,7 @@ function default_1(core) {
         });
     }
     catch (err) {
-        throw new figma_dash_core_1.default.FigmaDashError(err);
+        throw new figma_dash_core_1.FigmaDashError(err);
     }
 }
 exports.default = default_1;

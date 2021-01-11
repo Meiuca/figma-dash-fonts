@@ -1,4 +1,4 @@
-import FigmaDashCore from "figma-dash-core";
+import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
 import downloadFonts from "./font-downloader";
 import correctFontName from "./font-name-corrector";
 import convertLink from "./link-converter";
@@ -56,6 +56,6 @@ export default async function (core?: FigmaDashCore) {
 
     if (core.config.fonts.linkCommand) await link(core);
   } catch (err) {
-    throw new FigmaDashCore.FigmaDashError(err, "Check the config file");
+    throw new FigmaDashError(err, "Check the config file");
   }
 }
