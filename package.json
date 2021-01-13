@@ -1,5 +1,5 @@
 {
-  "name": "figma-dash-fonts",
+  "name": "meiuca-engine-fonts",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "css": "^3.0.0",
-    "figma-dash-core": "https://github.com/Meiuca/figma-dash-core.git",
+    "meiuca-engine-core": "https://github.com/Meiuca/meiuca-engine-core",
     "opentype.js": "^1.3.3"
   },
   "devDependencies": {

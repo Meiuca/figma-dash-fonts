@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const css_1 = __importDefault(require("css"));
-const figma_dash_core_1 = require("figma-dash-core");
+const meiuca_engine_core_1 = require("meiuca-engine-core");
 const axios_1 = __importDefault(require("axios"));
 const safeStringArray = ["error", "error"];
 function cssMapper(rule) {
@@ -41,7 +41,7 @@ function default_1(urls) {
             return (cssObj.stylesheet?.rules || []).map(cssMapper);
         }
         catch (err) {
-            throw new figma_dash_core_1.FigmaDashError(err, `error thrown when fetching ${url}`);
+            throw new meiuca_engine_core_1.MeiucaEngineError(err, `error thrown when fetching ${url}`);
         }
     });
 }

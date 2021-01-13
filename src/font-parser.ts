@@ -1,6 +1,6 @@
-import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
+import MeiucaEngineCore, { MeiucaEngineError } from "meiuca-engine-core";
 
-export default function (src: string, core: FigmaDashCore) {
+export default function (src: string, core: MeiucaEngineCore) {
   try {
     let fonts = core.functions.parseDeepObj(require(src));
 
@@ -29,6 +29,6 @@ export default function (src: string, core: FigmaDashCore) {
       })
       .flat(2);
   } catch (err) {
-    throw new FigmaDashError(err, "try 'init -f' to reset the config file");
+    throw new MeiucaEngineError(err, "try 'init -f' to reset the config file");
   }
 }

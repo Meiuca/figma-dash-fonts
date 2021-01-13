@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const figma_dash_core_1 = __importStar(require("figma-dash-core"));
+const meiuca_engine_core_1 = __importStar(require("meiuca-engine-core"));
 const font_downloader_1 = __importDefault(require("./font-downloader"));
 const font_name_corrector_1 = __importDefault(require("./font-name-corrector"));
 const link_converter_1 = __importDefault(require("./link-converter"));
@@ -31,7 +31,7 @@ const path_1 = __importDefault(require("path"));
 const linker_1 = __importDefault(require("./linker"));
 async function default_1(core) {
     if (!core)
-        core = new figma_dash_core_1.default();
+        core = new meiuca_engine_core_1.default();
     try {
         core.validations.validateFonts();
         let fonts = [];
@@ -55,7 +55,7 @@ async function default_1(core) {
             await linker_1.default(core);
     }
     catch (err) {
-        throw new figma_dash_core_1.FigmaDashError(err, "Check the config file");
+        throw new meiuca_engine_core_1.MeiucaEngineError(err, "Check the config file");
     }
 }
 exports.default = default_1;

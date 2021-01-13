@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const figma_dash_core_1 = require("figma-dash-core");
+const meiuca_engine_core_1 = require("meiuca-engine-core");
 function default_1(src, core) {
     try {
         let fonts = core.functions.parseDeepObj(require(src));
@@ -25,7 +25,7 @@ function default_1(src, core) {
             .flat(2);
     }
     catch (err) {
-        throw new figma_dash_core_1.FigmaDashError(err, "try 'init -f' to reset the config file");
+        throw new meiuca_engine_core_1.MeiucaEngineError(err, "try 'init -f' to reset the config file");
     }
 }
 exports.default = default_1;

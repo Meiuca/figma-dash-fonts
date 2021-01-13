@@ -1,2 +1,2 @@
-import FigmaDashCore from "figma-dash-core";
-export default function (core: FigmaDashCore): Promise<0>;
+import MeiucaEngineCore from "meiuca-engine-core";
+export default function (core: MeiucaEngineCore): Promise<void>;

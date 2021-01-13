@@ -1,11 +1,11 @@
 import chalk from "chalk";
 import path from "path";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
-import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
-import { DirectLink } from "figma-dash-core/dist/config-handler";
+import MeiucaEngineCore, { MeiucaEngineError } from "meiuca-engine-core";
+import { DirectLink } from "meiuca-engine-core/dist/config-handler";
 import axios from "axios";
 
-export default async function (fonts: DirectLink[], core: FigmaDashCore) {
+export default async function (fonts: DirectLink[], core: MeiucaEngineCore) {
   let outPath = path.resolve(process.cwd(), core.config.fonts!.output);
 
   if (!existsSync(outPath)) mkdirSync(outPath, { recursive: true });
@@ -26,7 +26,10 @@ export default async function (fonts: DirectLink[], core: FigmaDashCore) {
 
       writeFileSync(out, data);
     } catch (err) {
-      throw new FigmaDashError(err, `Error thrown when fetching ${font.src}`);
+      throw new MeiucaEngineError(
+        err,
+        `Error thrown when fetching ${font.src}`
+      );
     }
   });
 

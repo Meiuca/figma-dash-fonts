@@ -1,15 +1,13 @@
 import chalk from "chalk";
 import { spawn } from "child_process";
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 
-export default function (core: FigmaDashCore): Promise<0> {
+export default function (core: MeiucaEngineCore): Promise<void> {
   if (!core.config.fonts)
-    return new Promise((_, reject) => reject(new Error("fonts is undefined")));
+    return Promise.reject(new Error("fonts is undefined"));
 
   if (!core.config.fonts.linkCommand)
-    return new Promise((_, reject) =>
-      reject(new Error("fonts.linkCommand is undefined"))
-    );
+    return Promise.reject(new Error("fonts.linkCommand is undefined"));
 
   console.log(
     chalk.greenBright("\ninfo"),
@@ -45,7 +43,7 @@ export default function (core: FigmaDashCore): Promise<0> {
       if (code === 0) {
         console.log(`\n${command} executed with exit code: 0`);
 
-        resolve(0);
+        resolve();
       } else {
         reject(new Error(`${command} executed with exit code: ${code}`));
       }

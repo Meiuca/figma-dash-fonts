@@ -7,9 +7,9 @@ const chalk_1 = __importDefault(require("chalk"));
 const child_process_1 = require("child_process");
 function default_1(core) {
     if (!core.config.fonts)
-        return new Promise((_, reject) => reject(new Error("fonts is undefined")));
+        return Promise.reject(new Error("fonts is undefined"));
     if (!core.config.fonts.linkCommand)
-        return new Promise((_, reject) => reject(new Error("fonts.linkCommand is undefined")));
+        return Promise.reject(new Error("fonts.linkCommand is undefined"));
     console.log(chalk_1.default.greenBright("\ninfo"), "Running", chalk_1.default.blueBright(core.config.fonts.linkCommand));
     let [command, ...args] = core.config.fonts.linkCommand.split(" ");
     return new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ function default_1(core) {
         childProcess.on("close", (code) => {
             if (code === 0) {
                 console.log(`\n${command} executed with exit code: 0`);
-                resolve(0);
+                resolve();
             }
             else {
                 reject(new Error(`${command} executed with exit code: ${code}`));

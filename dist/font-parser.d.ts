@@ -1,2 +1,2 @@
-import FigmaDashCore from "figma-dash-core";
-export default function (src: string, core: FigmaDashCore): string[];
+import MeiucaEngineCore from "meiuca-engine-core";
+export default function (src: string, core: MeiucaEngineCore): string[];

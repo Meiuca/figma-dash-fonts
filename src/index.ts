@@ -1,4 +1,4 @@
-import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
+import MeiucaEngineCore, { MeiucaEngineError } from "meiuca-engine-core";
 import downloadFonts from "./font-downloader";
 import correctFontName from "./font-name-corrector";
 import convertLink from "./link-converter";
@@ -6,8 +6,8 @@ import parseFonts from "./font-parser";
 import path from "path";
 import link from "./linker";
 
-export default async function (core?: FigmaDashCore) {
-  if (!core) core = new FigmaDashCore();
+export default async function (core?: MeiucaEngineCore) {
+  if (!core) core = new MeiucaEngineCore();
 
   try {
     core.validations.validateFonts();
@@ -56,6 +56,6 @@ export default async function (core?: FigmaDashCore) {
 
     if (core.config.fonts.linkCommand) await link(core);
   } catch (err) {
-    throw new FigmaDashError(err, "Check the config file");
+    throw new MeiucaEngineError(err, "Check the config file");
   }
 }

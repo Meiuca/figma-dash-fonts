@@ -1,5 +1,5 @@
 import css, { Declaration, FontFace } from "css";
-import { FigmaDashError } from "figma-dash-core";
+import { MeiucaEngineError } from "meiuca-engine-core";
 import axios from "axios";
 
 const safeStringArray = ["error", "error"];
@@ -54,7 +54,7 @@ export default function (urls: string[]) {
 
       return (cssObj.stylesheet?.rules || []).map(cssMapper);
     } catch (err) {
-      throw new FigmaDashError(err, `error thrown when fetching ${url}`);
+      throw new MeiucaEngineError(err, `error thrown when fetching ${url}`);
     }
   });
 }
