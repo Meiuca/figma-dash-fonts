@@ -25,7 +25,7 @@ function default_1(src, core) {
             .flat(2);
     }
     catch (err) {
-        throw new meiuca_engine_core_1.MeiucaEngineError(err, "try 'init -f' to reset the config file");
+        throw new meiuca_engine_core_1.MeiucaEngineError(err, "try 'import-from-figma' if the problem is a MODULE NOT FOUND\n\tor 'init -f' if it is something else");
     }
 }
 exports.default = default_1;

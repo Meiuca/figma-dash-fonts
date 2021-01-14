@@ -92,7 +92,7 @@ lodash@^4.17.20:
 
 "meiuca-engine-core@https://github.com/Meiuca/meiuca-engine-core":
   version "1.0.0"
-  resolved "https://github.com/Meiuca/meiuca-engine-core#e8f81af86a901e9067b62c813629ff2317308ed3"
+  resolved "https://github.com/Meiuca/meiuca-engine-core#793c8e1cd2a9ac5bc767d84ef387331cad5ea4e8"
   dependencies:
     chalk "^4.1.0"
     lodash "^4.17.20"
